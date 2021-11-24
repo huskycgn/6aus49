@@ -1,5 +1,6 @@
 from random import sample
 from datetime import datetime
+from zeitberechnen import zeitberechnen
 
 
 class Lotterie:
@@ -7,18 +8,15 @@ class Lotterie:
     Parameter ist eine Liste mit sechs Integerwerten.'''
 
     def __init__(self, tip):
-        self.lotteriezahlen = list(range(1, 50))
-        self.lottery = tip
+        self.lotteriezahlen = list(range(1, 50))  # Anzahl der Gesamtzahlen minus 1
+        self.lottery = tip  # Der ausgefüllte "Lottoschein"
 
     def ziehung_der_zahlen(self):
-        ziehung = sample(self.lotteriezahlen, 6)
-        return sorted(ziehung)
+        ziehung = sample(self.lotteriezahlen, 6)  # Anzahl der zu ziehenden Zahlen
+        return sorted(ziehung)  # Gibt die zufällig gezogenen Zahlen aus.
 
     def output_zahlen(self):
         return self.lotteriezahlen
-
-    def out_myticket(self):
-        return self.lottery
 
     def deter_result(self):
         if sorted(self.lottery) == sorted(self.ziehung_der_zahlen()):
@@ -26,7 +24,7 @@ class Lotterie:
         else:
             return False
 
-    @staticmethod
+    @staticmethod  # statische Methode, um die Eingaben zu prüfen.
     def eingabe_pruefen(eingabe):
         if str(eingabe).isnumeric():
             if 49 >= int(eingabe) >= 0:
@@ -37,21 +35,6 @@ class Lotterie:
             print("Buchstaben sind nicht erlaubt!")
             return False
 
-
-def zeitberechnen(start, ende):
-    """Nimmt datetime Objekte an
-    und gibt Zeitdifferenzen als Liste aus
-    0: Gesamtdauer in Sekunden (int)
-    1: Dauer in Stunden (int)
-    2: Dauer in Minuten (int)
-    3: Dauer in Sekunden (int)"""
-    dauer = ende - start
-    dauer = int(dauer.seconds)
-    dauer = int(dauer)
-    stunden = dauer // 3600  # Sekunden in einer Stunde.
-    minuten = (dauer // 60) - (stunden * 60)  # Berechnung der Minuten - Abzueglich der bereits berechneten Stunden.
-    sekunden = dauer - ((stunden * 3600) + (minuten * 60))
-    return [dauer, stunden, minuten, sekunden]
 
 startzeit = datetime.now()
 my_ticket = []
