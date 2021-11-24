@@ -1,4 +1,5 @@
 from random import sample
+from datetime import datetime
 
 
 class Lotterie:
@@ -37,6 +38,22 @@ class Lotterie:
             return False
 
 
+def zeitberechnen(start, ende):
+    """Nimmt datetime Objekte an
+    und gibt Zeitdifferenzen als Liste aus
+    0: Gesamtdauer in Sekunden (int)
+    1: Dauer in Stunden (int)
+    2: Dauer in Minuten (int)
+    3: Dauer in Sekunden (int)"""
+    dauer = ende - start
+    dauer = int(dauer.seconds)
+    dauer = int(dauer)
+    stunden = dauer // 3600  # Sekunden in einer Stunde.
+    minuten = (dauer // 60) - (stunden * 60)  # Berechnung der Minuten - Abzueglich der bereits berechneten Stunden.
+    sekunden = dauer - ((stunden * 3600) + (minuten * 60))
+    return [dauer, stunden, minuten, sekunden]
+
+startzeit = datetime.now()
 my_ticket = []
 
 while len(my_ticket) < 6:
@@ -54,14 +71,12 @@ while len(my_ticket) < 6:
 
 print(sorted(my_ticket))
 
-
 # my_ticket = [2, 28, 35, 15, 8, 19]
 l = Lotterie(my_ticket)
-print(l.ziehung_der_zahlen())
 
 anzahl_durchlaeufe = 0
 verloren = True
-
+endzeit = datetime.now()
 
 while verloren is True:
     ergebnis = l.deter_result()
@@ -71,5 +86,16 @@ while verloren is True:
         if ergebnis is True:
             verloren = False
             print("Gewonnen")
+            endzeit = datetime.now()
 
-print(anzahl_durchlaeufe)
+preisreihe = 120  # Kosten in Euro mal zehn.
+kosten = (anzahl_durchlaeufe * preisreihe) / 100
+kosten = float(kosten)
+kosten = "{0:,.2f}".format(kosten)
+berechnungszeit = zeitberechnen(startzeit, endzeit)
+
+print(f"6 Richtige nach {anzahl_durchlaeufe:,d} versuchen.")
+print(f"Das hätte {kosten} Euro gekostet.")
+print(f"Dauer der Berechnung:\n{berechnungszeit[1]} Stunde(n).\n"
+      f"{berechnungszeit[2]} Minuten und \n"
+      f"{berechnungszeit[3]} Sekunden.")
