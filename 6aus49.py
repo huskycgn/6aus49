@@ -27,7 +27,7 @@ class Lotterie:
     @staticmethod  # statische Methode, um die Eingaben zu prüfen.
     def eingabe_pruefen(eingabe):
         if str(eingabe).isnumeric():
-            if 49 >= int(eingabe) >= 0:
+            if 49 >= int(eingabe) > 0:
                 return True
             else:
                 return False
@@ -41,8 +41,8 @@ my_ticket = []
 
 while len(my_ticket) < 6:
     zahl = input("Bitte Zahl zwischen 6 und 49 eingeben: ")
-    if Lotterie.eingabe_pruefen(zahl) is True:
-        dublette = zahl in my_ticket
+    if Lotterie.eingabe_pruefen(int(zahl)) is True:
+        dublette = int(zahl) in my_ticket
         if dublette is False:
             my_ticket.append(int(zahl))
         else:
