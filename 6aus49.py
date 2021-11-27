@@ -78,7 +78,8 @@ kosten = "{0:,.2f}".format(kosten)
 berechnungszeit = zeitberechnen(startzeit, endzeit)
 
 print(f"6 Richtige nach {anzahl_durchlaeufe:,d} versuchen.")
-print(f"Das hätte {kosten} Euro gekostet.")
+print(f"Das hätte {kosten} Euro gekostet.\nBis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
+      f"bei zwei Ziehungen pro Woche.")
 print(f"Dauer der Berechnung:\n{berechnungszeit[1]} Stunde(n).\n"
       f"{berechnungszeit[2]} Minuten und \n"
       f"{berechnungszeit[3]} Sekunden.")
