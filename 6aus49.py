@@ -2,6 +2,7 @@ from random import sample
 from datetime import datetime
 from zeitberechnen import zeitberechnen
 import datenbank
+import mysql.connector as database
 
 
 class Lotterie:
