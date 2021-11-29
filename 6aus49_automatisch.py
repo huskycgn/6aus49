@@ -12,19 +12,6 @@ while True:
     startzeit = datetime.now()
     my_ticket = sorted(sample(range(1, 50), 6))
 
-    '''while len(my_ticket) < 6:
-        zahl = input("Bitte Zahl zwischen 6 und 49 eingeben: ")
-        if Lotterie.eingabe_pruefen(int(zahl)) is True:
-            dublette = int(zahl) in my_ticket
-            if dublette is False:
-                my_ticket.append(int(zahl))
-            else:
-                print("Dubletten sind nicht zugelassen! ")
-                continue
-        else:
-            print("Zahl muss zwischen 6 und 49 liegen! ")
-            continue'''
-
     # my_ticket = [2, 28, 35, 15, 8, 19]
     l = LotterieClass.Lotterie(sorted(my_ticket))
 
