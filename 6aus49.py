@@ -10,7 +10,7 @@ startzeit = datetime.now()
 my_ticket = []
 
 while len(my_ticket) < 6:
-    zahl = input("Bitte Zahl zwischen 6 und 49 eingeben: ")
+    zahl = input("Bitte Zahl zwischen 1 und 49 eingeben: ")
     if LotterieClass.Lotterie.eingabe_pruefen(int(zahl)) is True:
         dublette = int(zahl) in my_ticket
         if dublette is False:
