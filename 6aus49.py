@@ -19,7 +19,7 @@ while len(my_ticket) < 6:
             print("Dubletten sind nicht zugelassen! ")
             continue
     else:
-        print("Zahl muss zwischen 6 und 49 liegen! ")
+        print("Zahl muss zwischen 1 und 49 liegen! ")
         continue
 
 print(sorted(my_ticket))
