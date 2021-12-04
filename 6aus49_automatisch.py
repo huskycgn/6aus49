@@ -4,7 +4,10 @@ from zeitberechnen import zeitberechnen
 import datenbank
 import time
 import LotterieClass
+import socket
 
+hostname = socket.gethostname()
+hostip = socket.gethostbyname(socket.gethostname())
 
 while True:
 
@@ -46,4 +49,4 @@ while True:
           f"{berechnungszeit[2]} Minuten und \n"
           f"{berechnungszeit[3]} Sekunden.")
 
-    datenbank.daten_einfuegen(anzahl_durchlaeufe, berechnungszeit_roh, sorted(my_ticket))
+    datenbank.daten_einfuegen(anzahl_durchlaeufe, berechnungszeit_roh, sorted(my_ticket), hostip)

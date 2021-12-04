@@ -1,7 +1,7 @@
 import mysql.connector as database
 
 
-def daten_einfuegen(anzahl_versuche, rechenzeit, ticket):
+def daten_einfuegen(anzahl_versuche, rechenzeit, ticket, host):
     connection = database.connect(user='lotto_user',
                                   host='192.168.178.22',
                                   database='lotto',
@@ -9,10 +9,8 @@ def daten_einfuegen(anzahl_versuche, rechenzeit, ticket):
 
     mycursor = connection.cursor()
     sql_befehl = "INSERT INTO spiele " \
-                 "(nummer, anzahl_versuche, rechenzeit, ticket) VALUES " \
-                 f"(NULL, {anzahl_versuche}, {rechenzeit}, '{ticket}')"
+                 "(nummer, anzahl_versuche, rechenzeit, ticket, host) VALUES " \
+                 f"(NULL, {anzahl_versuche}, {rechenzeit}, '{ticket}', '{host}')"
     mycursor.execute(sql_befehl)
     connection.commit()
     connection.close()
-
-# daten_einfuegen(345, 34223, [1, 45, 18, 38, 6, 1])
