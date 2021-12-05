@@ -1,6 +1,6 @@
 from datetime import datetime
 from zeitberechnen import zeitberechnen
-import datenbank
+from datenbank import daten_einfuegen
 import time
 import LotterieClass
 
@@ -58,4 +58,4 @@ print(f"Dauer der Berechnung:\n{berechnungszeit[1]} Stunde(n).\n"
       f"{berechnungszeit[2]} Minuten und \n"
       f"{berechnungszeit[3]} Sekunden.")
 
-datenbank.daten_einfuegen(anzahl_durchlaeufe, berechnungszeit_roh, sorted(my_ticket))
+daten_einfuegen(anzahl_durchlaeufe, berechnungszeit_roh, sorted(my_ticket))
