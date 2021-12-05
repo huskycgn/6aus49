@@ -6,8 +6,7 @@ import time
 import LotterieClass
 import socket
 
-hostname = socket.gethostname()
-hostip = socket.gethostbyname(socket.gethostname())
+hostip = socket.gethostbyname(socket.getfqdn())
 
 while True:
 
