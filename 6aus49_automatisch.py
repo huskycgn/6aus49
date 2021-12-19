@@ -25,7 +25,7 @@ while True:
 
     while verloren is True:
         ergebnis = l.deter_result()
-        print(anzahl_durchlaeufe, end='\r')
+        print(anzahl_durchlaeufe, 'Versuche', end='\r')
         if ergebnis is False:
             anzahl_durchlaeufe += 1
         else:
