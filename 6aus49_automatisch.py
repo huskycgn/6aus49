@@ -25,13 +25,13 @@ while True:
 
     while verloren is True:
         ergebnis = l.deter_result()
-        print(anzahl_durchlaeufe, 'Versuche', end='\r')
+        print(f"\n{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
         if ergebnis is False:
             anzahl_durchlaeufe += 1
         else:
             if ergebnis is True:
                 verloren = False
-                print("Gewonnen")
+                print("\nGewonnen\n")
                 endzeit = datetime.now()
                 endzeit_unix = time.time()
 

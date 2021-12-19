@@ -34,13 +34,13 @@ endzeit_unix = time.time()
 
 while verloren is True:
     ergebnis = l.deter_result()
-    print(anzahl_durchlaeufe, 'Versuche', end='\r')
+    print(f"\n{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
     if ergebnis is False:
         anzahl_durchlaeufe += 1
     else:
         if ergebnis is True:
             verloren = False
-            print("Gewonnen")
+            print("\nGewonnen\n")
             endzeit = datetime.now()
             endzeit_unix = time.time()
 
@@ -52,7 +52,7 @@ berechnungszeit = zeitberechnen(startzeit, endzeit)
 berechnungszeit_roh = endzeit_unix - startzeit_unix
 berechnungszeit_roh = float(berechnungszeit_roh)
 
-print(f"6 Richtige nach {anzahl_durchlaeufe:,d} versuchen.")
+print(f"\n6 Richtige nach {anzahl_durchlaeufe:,d} versuchen.")
 print(f"Das hätte {kosten} Euro gekostet.\nBis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
       f"bei zwei Ziehungen pro Woche.")
 print(f"Dauer der Berechnung:\n{berechnungszeit[1]} Stunde(n).\n"
