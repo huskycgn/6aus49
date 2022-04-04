@@ -1,6 +1,5 @@
 from datetime import datetime
 from zeitberechnen import zeitberechnen
-# from datenbank import daten_einfuegen
 import time
 import LotterieClass
 from tkinter import *
@@ -10,7 +9,7 @@ root = Tk()
 root.title("Lotto Simulator")
 
 e = Entry(root, width=35, borderwidth=5)
-e.grid(row=10, column=0, columnspan=3, padx=10, pady=10)
+e.grid(row=0, column=6, columnspan=3, padx=10, pady=10)
 lotto_ticket = []
 
 
@@ -26,9 +25,16 @@ def button_click(number):
         e.insert(0, str(lotto_ticket))
 
 
+def button_clear():
+    global lotto_ticket
+    lotto_ticket = []
+    e.delete(0, END)
+
+
 def button_enter():
     print(lotto_ticket)
-
+    startzeit_unix = time.time()
+    startzeit = datetime.now()
     if len(lotto_ticket) < 6:
         print("Zu wenige Zahlen!")
     elif len(lotto_ticket) > 6:
@@ -117,24 +123,6 @@ Button(root, text=48, padx=40, pady=20, command=lambda: button_click(48)).grid(r
 Button(root, text=49, padx=40, pady=20, command=lambda: button_click(49)).grid(row=9, column=4)
 
 Button(root, text='ENTER', padx=40, pady=20, command=lambda: button_enter()).grid(row=9, column=6)
-
-
-startzeit_unix = time.time()
-startzeit = datetime.now()
-
-
-
-'''while len(my_ticket) < 6:
-    zahl = input("Bitte Zahl zwischen 1 und 49 eingeben: ")
-    if LotterieClass.Lotterie.eingabe_pruefen(int(zahl)) is True:
-        dublette = int(zahl) in my_ticket
-        if dublette is False:
-            my_ticket.append(int(zahl))
-        else:
-            print("Dubletten sind nicht zugelassen! ")
-            continue
-    else:
-        print("Zahl muss zwischen 1 und 49 liegen! ")
-        continue'''
+Button(root, text='CLEAR', padx=40, pady=20, command=lambda: button_clear()).grid(row=9, column=7)
 
 root.mainloop()
