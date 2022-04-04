@@ -36,9 +36,9 @@ def button_enter():
     startzeit_unix = time.time()
     startzeit = datetime.now()
     if len(lotto_ticket) < 6:
-        print("Zu wenige Zahlen!")
+        messagebox.showerror(title="Fehler!", message="Zu wenige Zahlen ausgewählt!")
     elif len(lotto_ticket) > 6:
-        print("Zu viele Zahlen!")
+        messagebox.showerror(title="Fehler!", message="Zu viele Zahlen ausgewählt!")
     else:
         # my_ticket = [2, 28, 35, 15, 8, 19]
         l = LotterieClass.Lotterie(lotto_ticket)
