@@ -15,6 +15,9 @@ e.grid(row=0, column=6, columnspan=2, padx=10, pady=10)
 v = Label(root, width=40, borderwidth=2, text='0 Versuche')
 v.grid(row=1, column=6, columnspan=2, padx=10, pady=10)
 
+o = Label(root, width=40, borderwidth=2, text='Noch keine Ergebnisse da!')
+o.grid(row=1, column=6, rowspan=2, columnspan=2, padx=10, pady=10)
+
 lotto_ticket = []
 
 
@@ -79,10 +82,10 @@ def button_enter():
         berechnungszeit_roh = endzeit_unix - startzeit_unix
         berechnungszeit_roh = float(berechnungszeit_roh)
 
-        messagebox.showinfo(title="Ergebnis", message=f"\n6 Richtige nach {anzahl_durchlaeufe:,d} versuchen."
-                                                      f"\nDas hätte {kosten} Euro gekostet.\n"
-                                                      f"Bis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
-                                                      f"bei zwei Ziehungen pro Woche.")
+        o.config(text=f"Ergebnis:\n6 Richtige nach {anzahl_durchlaeufe:,d} versuchen."
+                                          f"\nDas hätte {kosten} Euro gekostet.\n"
+                                          f"Bis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
+                                          f"bei zwei Ziehungen pro Woche.")
 
 
 Button(root, text=1, padx=40, pady=20, command=lambda: button_click(1)).grid(row=0, column=1)
