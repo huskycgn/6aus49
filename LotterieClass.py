@@ -1,6 +1,5 @@
 from random import sample
 
-
 class Lotterie:
     '''Lotterieklasse - kann alles, was eine Lotterie koennen sollte.
     Parameter ist eine Liste mit sechs Integerwerten.'''

@@ -9,15 +9,6 @@ from zeitberechnen import zeitberechnen
 root = Tk()
 root.title("Lotto Simulator")
 
-e = Entry(root, width=20, borderwidth=1)
-e.grid(row=0, column=6, columnspan=2, padx=0, pady=0)
-
-
-global v
-
-v = Label(root, width=40, borderwidth=2, text="0 Versuche")
-v.grid(row=1, column=6, columnspan=2, padx=0, pady=0)
-
 lotto_ticket = []
 
 
@@ -59,38 +50,42 @@ def button_enter():
     elif len(lotto_ticket) > 6:
         messagebox.showerror(title="Fehler!", message="Zu viele Zahlen ausgewählt!")
     else:
-        update_versuche("Geht los")
         l = LotterieClass.Lotterie(lotto_ticket)
-        anzahl_durchlaeufe = 0
+        number_of_runs = 0
         verloren = True
         endzeit = datetime.now()
         endzeit_unix = time.time()
-
-        while verloren is True:
-            ergebnis = l.deter_result()
-            # print(f"\n{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
-            if ergebnis is False:
-                anzahl_durchlaeufe += 1
-            else:
-                if ergebnis is True:
-                    verloren = False
-                    print("\nGewonnen\n")
-                    endzeit = datetime.now()
-                    endzeit_unix = time.time()
-
         preisreihe = 120  # Kosten in Euro mal zehn.
-        kosten = (anzahl_durchlaeufe * preisreihe) / 100
+        kosten = (number_of_runs * preisreihe) / 100
         kosten = float(kosten)
         kosten = "{0:,.2f}".format(kosten)
         berechnungszeit = zeitberechnen(startzeit, endzeit)
         berechnungszeit_roh = endzeit_unix - startzeit_unix
         berechnungszeit_roh = float(berechnungszeit_roh)
 
-        messagebox.showinfo(title="Ergebnis", message=f"\n6 Richtige nach {anzahl_durchlaeufe:,d} versuchen."
-                                                      f"\nDas hätte {kosten} Euro gekostet.\n"
-                                                      f"Bis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
-                                                      f"bei zwei Ziehungen pro Woche.")
+        while verloren is True:
+            result = l.deter_result()
+            print(f"\n{number_of_runs:,d}", 'Versuche', end='\r')
+            update_versuche(number_of_runs)
+            if result is False:
+                update_versuche(number_of_runs)
+                number_of_runs += 1
+            else:
+                if result is True:
+                    verloren = False
+                    # print("\nGewonnen\n")
+                    endzeit = datetime.now()
+                    endzeit_unix = time.time()
+                    o.config(text=f"\n6 Richtige nach {number_of_runs:,d} versuchen."
+                                  f"\nDas hätte {kosten} Euro gekostet.\n"
+                                  f"Bis zum Sieg wären {number_of_runs // 104:,d} Jahre vergangen\n"
+                                  f"bei zwei Ziehungen pro Woche.")
 
+        # messagebox.showinfo(title="Ergebnis", message=
+
+
+o = Label(root, width=40, borderwidth=2, text="Noch kein Ergebnis da.")
+o.grid(row=2, column=7, columnspan=2, rowspan=2, padx=0, pady=0)
 
 Button(root, text=1, padx=15, pady=20, command=lambda: button_click(1)).grid(row=0, column=1)
 Button(root, text=2, padx=15, pady=20, command=lambda: button_click(2)).grid(row=0, column=2)
@@ -142,7 +137,15 @@ Button(root, text=47, padx=15, pady=20, command=lambda: button_click(47)).grid(r
 Button(root, text=48, padx=15, pady=20, command=lambda: button_click(48)).grid(row=9, column=3)
 Button(root, text=49, padx=15, pady=20, command=lambda: button_click(49)).grid(row=9, column=4)
 
-Button(root, text='ENTER', padx=15, pady=20, command=lambda: button_enter()).grid(row=9, column=6)
-Button(root, text='CLEAR', padx=15, pady=20, command=lambda: button_clear()).grid(row=9, column=7)
+Button(root, text='ENTER', padx=15, pady=20, command=lambda: button_enter()).grid(row=9, column=7)
+Button(root, text='CLEAR', padx=15, pady=20, command=lambda: button_clear()).grid(row=9, column=8)
+
+e = Entry(root, width=20, borderwidth=1)
+e.grid(row=0, column=7, columnspan=2, padx=0, pady=0)
+
+global v
+
+v = Label(root, width=40, borderwidth=2, text='0 Versuche')
+v.grid(row=1, column=7, columnspan=2, padx=0, pady=0)
 
 root.mainloop()
