@@ -1,3 +1,4 @@
+import tkinter
 from datetime import datetime
 from zeitberechnen import zeitberechnen
 import time
@@ -8,8 +9,12 @@ from tkinter import messagebox
 root = Tk()
 root.title("Lotto Simulator")
 
-e = Entry(root, width=35, borderwidth=5)
-e.grid(row=0, column=6, columnspan=3, padx=10, pady=10)
+e = Entry(root, width=35, borderwidth=2)
+e.grid(row=0, column=6, columnspan=2, padx=10, pady=10)
+
+v = Label(root, width=40, borderwidth=2, text='0 Versuche')
+v.grid(row=1, column=6, columnspan=2, padx=10, pady=10)
+
 lotto_ticket = []
 
 
@@ -17,6 +22,13 @@ def button_click(number):
     global lotto_ticket
     if len(lotto_ticket) < 6:
         lotto_ticket.append(number)
+        for number in lotto_ticket:
+            if lotto_ticket.count(number) >= 2:
+                messagebox.showerror(title="Fehler!", message="Dubletten sind nicht erlaubt!\n"
+                                                              f"Die {number} ist doppelt.")
+                lotto_ticket.pop()
+            else:
+                continue
         lotto_ticket = sorted(lotto_ticket)
         e.delete(0, END)
         e.insert(0, str(lotto_ticket))
@@ -68,7 +80,8 @@ def button_enter():
         berechnungszeit_roh = float(berechnungszeit_roh)
 
         messagebox.showinfo(title="Ergebnis", message=f"\n6 Richtige nach {anzahl_durchlaeufe:,d} versuchen."
-                                                      f"\nDas hätte {kosten} Euro gekostet.\nBis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
+                                                      f"\nDas hätte {kosten} Euro gekostet.\n"
+                                                      f"Bis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
                                                       f"bei zwei Ziehungen pro Woche.")
 
 
