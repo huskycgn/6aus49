@@ -1,10 +1,10 @@
-import tkinter
-from datetime import datetime
-from zeitberechnen import zeitberechnen
 import time
-import LotterieClass
+from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
+
+import LotterieClass
+from zeitberechnen import zeitberechnen
 
 root = Tk()
 root.title("Lotto Simulator")

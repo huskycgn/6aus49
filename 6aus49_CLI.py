@@ -1,10 +1,11 @@
-from random import sample
-from datetime import datetime
-from zeitberechnen import zeitberechnen
-import datenbank
-import time
-import LotterieClass
 import socket
+import time
+from datetime import datetime
+from random import sample
+
+import LotterieClass
+import datenbank
+from zeitberechnen import zeitberechnen
 
 hostip = socket.gethostbyname(socket.gethostname())
 
