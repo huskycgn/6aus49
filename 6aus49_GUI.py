@@ -31,7 +31,7 @@ def button_click(number):
     if len(lotto_ticket) < 6:
         lotto_ticket.append(number)
         for number in lotto_ticket:
-            if lotto_ticket.count(number) >= 2:
+            if lotto_ticket.count(number) >= 6:
                 messagebox.showerror(title="Fehler!", message="Dubletten sind nicht erlaubt!\n"
                                                               f"Die {number} ist doppelt.")
                 lotto_ticket.pop()
