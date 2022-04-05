@@ -16,7 +16,10 @@ class Lotterie:
         return self.lotteriezahlen
 
     def deter_result(self):
-        if sorted(self.lottery) == sorted(self.ziehung_der_zahlen()):
+        ziehung = sorted(self.ziehung_der_zahlen())
+        # ziehung = sorted([4, 7, 31, 34, 47, 49])
+        schein = sorted(self.lottery)
+        if schein == ziehung:
             return True
         else:
             return False

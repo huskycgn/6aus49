@@ -65,20 +65,18 @@ def button_enter():
         anzahl_durchlaeufe = 0
         verloren = True
         endzeit = datetime.now()
-        endzeit_unix = time.time()
 
         while verloren is True:
             ergebnis = l.deter_result()
-            print(f"\n{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
+            # print(f"\n{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
             v.config(text=f"\n{anzahl_durchlaeufe:,d} Versuche")
             if ergebnis is False:
                 anzahl_durchlaeufe += 1
             else:
                 if ergebnis is True:
                     verloren = False
-                    print("\nGewonnen\n")
+                    # print("\nGewonnen\n")
                     endzeit = datetime.now()
-                    endzeit_unix = time.time()
 
         preisreihe = 120  # Kosten in Euro mal zehn.
         kosten = (anzahl_durchlaeufe * preisreihe) / 100
