@@ -2,9 +2,9 @@ import time
 from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
-
 import LotterieClass
 from zeitberechnen import zeitberechnen
+import threading
 
 root = Tk()
 root.title("Lotto Simulator")
@@ -13,12 +13,17 @@ e = Entry(root, width=35, borderwidth=2)
 e.grid(row=0, column=6, columnspan=2, padx=10, pady=10)
 
 v = Label(root, width=40, borderwidth=2, text='0 Versuche')
-v.grid(row=1, column=6, columnspan=2, padx=10, pady=10)
+v.grid(row=8, column=6, columnspan=2, padx=10, pady=10)
 
 o = Label(root, width=40, borderwidth=2, text='Noch keine Ergebnisse da!')
 o.grid(row=1, column=6, rowspan=2, columnspan=2, padx=10, pady=10)
 
 lotto_ticket = []
+
+
+def start_lotto_thread():
+    t = threading.Thread(target=button_enter, daemon=True)
+    t.start()
 
 
 def button_click(number):
@@ -65,6 +70,7 @@ def button_enter():
         while verloren is True:
             ergebnis = l.deter_result()
             print(f"\n{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
+            v.config(text=f"\n{anzahl_durchlaeufe:,d} Versuche")
             if ergebnis is False:
                 anzahl_durchlaeufe += 1
             else:
@@ -79,13 +85,14 @@ def button_enter():
         kosten = float(kosten)
         kosten = "{0:,.2f}".format(kosten)
         berechnungszeit = zeitberechnen(startzeit, endzeit)
-        berechnungszeit_roh = endzeit_unix - startzeit_unix
-        berechnungszeit_roh = float(berechnungszeit_roh)
 
         o.config(text=f"Ergebnis:\n6 Richtige nach {anzahl_durchlaeufe:,d} versuchen."
-                                          f"\nDas hätte {kosten} Euro gekostet.\n"
-                                          f"Bis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
-                                          f"bei zwei Ziehungen pro Woche.")
+                      f"\nDas hätte {kosten} Euro gekostet.\n"
+                      f"Bis zum Sieg wären {anzahl_durchlaeufe // 104:,d} Jahre vergangen\n"
+                      f"bei zwei Ziehungen pro Woche.\n"
+                      f"Dauer der Berechnung:\n{berechnungszeit[1]} Stunde(n).\n"
+                      f"{berechnungszeit[2]} Minuten und \n"
+                      f"{berechnungszeit[3]} Sekunden.")
 
 
 Button(root, text=1, padx=15, pady=20, command=lambda: button_click(1)).grid(row=0, column=1)
@@ -138,7 +145,7 @@ Button(root, text=47, padx=15, pady=20, command=lambda: button_click(47)).grid(r
 Button(root, text=48, padx=15, pady=20, command=lambda: button_click(48)).grid(row=9, column=3)
 Button(root, text=49, padx=15, pady=20, command=lambda: button_click(49)).grid(row=9, column=4)
 
-Button(root, text='ENTER', padx=15, pady=20, command=lambda: button_enter()).grid(row=9, column=6)
+Button(root, text='ENTER', padx=15, pady=20, command=lambda: start_lotto_thread()).grid(row=9, column=6)
 Button(root, text='CLEAR', padx=15, pady=20, command=lambda: button_clear()).grid(row=9, column=7)
 
 root.mainloop()
