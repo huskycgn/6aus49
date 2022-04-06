@@ -33,7 +33,7 @@ endzeit_unix = time.time()
 
 while verloren is True:
     ergebnis = l.deter_result()
-    print(f"\n{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
+    print(f"{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
     if ergebnis is False:
         anzahl_durchlaeufe += 1
     else:
