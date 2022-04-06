@@ -33,7 +33,7 @@ endzeit_unix = time.time()
 
 while verloren is True:
     ergebnis = l.deter_result()
-    print(f"{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
+    print(f"{anzahl_durchlaeufe:,d}", 'Versuche', end='\r', flush=True)
     if ergebnis is False:
         anzahl_durchlaeufe += 1
     else:
@@ -42,7 +42,6 @@ while verloren is True:
             print("\nGewonnen\n")
             endzeit = datetime.now()
             endzeit_unix = time.time()
-
 preisreihe = 120  # Kosten in Euro mal zehn.
 kosten = (anzahl_durchlaeufe * preisreihe) / 100
 kosten = float(kosten)
