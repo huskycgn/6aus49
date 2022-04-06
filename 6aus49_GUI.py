@@ -132,9 +132,7 @@ Button(tastenframe, text=15, padx=15, pady=20, height=1, width=1, command=lambda
 Button(tastenframe, text=16, padx=15, pady=20, height=1, width=1, command=lambda: button_click(16)).grid(row=3, column=1)
 Button(tastenframe, text=17, padx=15, pady=20, height=1, width=1, command=lambda: button_click(17)).grid(row=3, column=2)
 Button(tastenframe, text=18, padx=15, pady=20, height=1, width=1, command=lambda: button_click(18)).grid(row=3, column=3)
-
 Button(tastenframe, text=19, padx=15, pady=20, height=1, width=1, command=lambda: button_click(19)).grid(row=3, column=4)
-
 Button(tastenframe, text=20, padx=15, pady=20, height=1, width=1, command=lambda: button_click(20)).grid(row=3, column=5)
 Button(tastenframe, text=21, padx=15, pady=20, height=1, width=1, command=lambda: button_click(21)).grid(row=4, column=1)
 Button(tastenframe, text=22, padx=15, pady=20, height=1, width=1, command=lambda: button_click(22)).grid(row=4, column=2)
