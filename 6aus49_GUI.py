@@ -75,7 +75,6 @@ def button_enter():
     verloren = True
     o.config(text='Noch keine Ergebnisse da!')
     clr_button.config(state=DISABLED)
-    print(lotto_ticket)
     startzeit = datetime.now()
     if len(lotto_ticket) < 6:
         messagebox.showerror(title="Fehler!", message="Zu wenige Zahlen ausgewählt!")
