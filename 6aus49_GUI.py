@@ -15,6 +15,7 @@ running = True
 anzahl_durchlaeufe = 0
 ergebnis = False
 lotto_ticket = []
+lotto_ticket_tk = StringVar()
 
 ergebnisframe = Frame(root, relief=RAISED, borderwidth=4)
 ergebnisframe.grid(column=4, columnspan=3, rowspan=8, row=0, padx=5, pady=5)
@@ -22,7 +23,7 @@ ergebnisframe.grid(column=4, columnspan=3, rowspan=8, row=0, padx=5, pady=5)
 tastenframe = Frame(root, relief=RAISED, borderwidth=4)
 tastenframe.grid(column=0, columnspan=3, row=0, padx=5, pady=5)
 
-e = Entry(ergebnisframe, width=35, borderwidth=2)
+e = Entry(ergebnisframe, textvariable=lotto_ticket_tk, width=35, borderwidth=2, state=DISABLED)
 e.grid(row=0, column=1, columnspan=2, padx=10, pady=10)
 
 v = Label(ergebnisframe, width=40, borderwidth=2, text='0 Versuche')
@@ -38,14 +39,18 @@ def start_lotto_thread():
 
 
 def button_click(number):
-    global lotto_ticket
+    global lotto_ticket, e
     if len(lotto_ticket) < 6:
         lotto_ticket.append(number)
+        e.config(textvariable=lotto_ticket_tk)
+        lotto_ticket_tk.set(str(lotto_ticket))
         for number in lotto_ticket:
             if lotto_ticket.count(number) >= 2:
                 messagebox.showerror(title="Fehler!", message="Dubletten sind nicht erlaubt!\n"
                                                               f"Die {number} ist doppelt.")
                 lotto_ticket.pop()
+                e.config(textvariable=lotto_ticket_tk)
+                lotto_ticket_tk.set(str(lotto_ticket))
             else:
                 continue
         lotto_ticket = sorted(lotto_ticket)
@@ -59,6 +64,8 @@ def button_click(number):
 def button_clear():
     global lotto_ticket
     lotto_ticket = []
+    e.config(textvariable=lotto_ticket_tk)
+    lotto_ticket_tk.set(str(lotto_ticket))
     e.delete(0, END)
     v.config(text='0 Versuche')
 
@@ -66,7 +73,7 @@ def button_clear():
 def cancel_lotto():
     global running
     running = False
-    button_clear()
+    clr_button.config(state=NORMAL)
 
 
 def button_enter():
