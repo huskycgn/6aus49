@@ -1,10 +1,10 @@
-import time
+import threading
 from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
+
 import LotterieClass
 from zeitberechnen import zeitberechnen
-import threading
 
 root = Tk()
 root.title("Lotto Simulator")
@@ -60,6 +60,7 @@ def button_clear():
     global lotto_ticket
     lotto_ticket = []
     e.delete(0, END)
+    v.config(text='0 Versuche')
 
 
 def cancel_lotto():
@@ -69,7 +70,10 @@ def cancel_lotto():
 
 
 def button_enter():
-    global clr_button, ergebnis, verloren, anzahl_durchlaeufe, endzeit, startzeit, lotto_ticket
+    global clr_button, ergebnis, verloren, anzahl_durchlaeufe, endzeit, startzeit, lotto_ticket, running
+    running = True
+    verloren = True
+    o.config(text='Noch keine Ergebnisse da!')
     clr_button.config(state=DISABLED)
     print(lotto_ticket)
     startzeit = datetime.now()
@@ -108,8 +112,10 @@ def button_enter():
                       f"{berechnungszeit[3]} Sekunden.")
     else:
         o.config(text=f"Abgebrochen nach {anzahl_durchlaeufe:,d} versuchen.")
-    clr_button.config(state=ACTIVE)
-    button_clear()
+
+
+'''    clr_button.config(state=ACTIVE)
+    button_clear()'''
 
 '''Clear-Taste - Nummerntasten sind unten'''
 clr_button = Button(ergebnisframe, text='CLEAR', padx=15, pady=20, command=lambda: button_clear())
@@ -221,4 +227,5 @@ btn47.grid(row=9, column=2)
 btn48.grid(row=9, column=3)
 btn49.grid(row=9, column=4)
 
-root.mainloop()
+while True:
+    root.mainloop()
