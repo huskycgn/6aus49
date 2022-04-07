@@ -104,7 +104,7 @@ def button_enter():
     if verloren is False:
         # print("\nGewonnen\n")
         endzeit = datetime.now()
-        preisreihe = 120  # Kosten in Euro mal zehn.
+        preisreihe = 180  # Kosten in Euro mal zehn.
         kosten = (anzahl_durchlaeufe * preisreihe) / 100
         kosten = float(kosten)
         kosten = "{0:,.2f}".format(kosten)

@@ -52,7 +52,7 @@
  [],
  False,
  False,
- 1649322201,
+ 1649325494,
  [('run.exe',
    'c:\\users\\t1468\\appdata\\local\\continuum\\miniconda3\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\run.exe',
    'EXECUTABLE')])

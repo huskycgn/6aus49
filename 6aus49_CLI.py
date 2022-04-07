@@ -1,8 +1,8 @@
-from datetime import datetime
-from zeitberechnen import zeitberechnen
 import time
-import LotterieClass
+from datetime import datetime
 
+import LotterieClass
+from zeitberechnen import zeitberechnen
 
 startzeit_unix = time.time()
 startzeit = datetime.now()
@@ -42,7 +42,7 @@ while verloren is True:
             print("\nGewonnen\n")
             endzeit = datetime.now()
             endzeit_unix = time.time()
-preisreihe = 120  # Kosten in Euro mal zehn.
+preisreihe = 180  # Kosten in Euro mal zehn.
 kosten = (anzahl_durchlaeufe * preisreihe) / 100
 kosten = float(kosten)
 kosten = "{0:,.2f}".format(kosten)
