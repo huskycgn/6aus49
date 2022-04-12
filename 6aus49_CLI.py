@@ -7,6 +7,7 @@ from zeitberechnen import zeitberechnen
 startzeit_unix = time.time()
 startzeit = datetime.now()
 my_ticket = []
+zahlenreihe = {}
 
 while len(my_ticket) < 6:
     zahl = input("Bitte Zahl zwischen 1 und 49 eingeben: ")
@@ -30,12 +31,14 @@ anzahl_durchlaeufe = 0
 verloren = True
 endzeit = datetime.now()
 endzeit_unix = time.time()
-
+for i in range(1, 50):
+    zahlenreihe[i] = 0
 while verloren is True:
     ergebnis = l.deter_result()
     print(f"{anzahl_durchlaeufe:,d}", 'Versuche', end='\r', flush=True)
     if ergebnis is False:
         anzahl_durchlaeufe += 1
+        l.statistik(zahlenreihe)
     else:
         if ergebnis is True:
             verloren = False
@@ -56,3 +59,4 @@ print(f"Das hätte {kosten} Euro gekostet.\nBis zum Sieg wären {anzahl_durchlae
 print(f"Dauer der Berechnung:\n{berechnungszeit[1]} Stunde(n).\n"
       f"{berechnungszeit[2]} Minuten und \n"
       f"{berechnungszeit[3]} Sekunden.")
+print(zahlenreihe)

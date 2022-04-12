@@ -96,8 +96,6 @@ def button_enter():
     verloren = True
     o.config(text='Noch keine Ergebnisse da!')
     button_disable(enter_button)
-    for i in range(1, 50):
-        zahlenreihe[i] = 0
     startzeit = datetime.now()
     if len(lotto_ticket) < 6:
         messagebox.showerror(title="Fehler!", message="Zu wenige Zahlen ausgewählt!")
@@ -110,15 +108,15 @@ def button_enter():
         endzeit = datetime.now()
         while verloren is True and running is True:
             ergebnis = l.deter_result()
+            zahlenreihe = l.deter_result()[1]
+            ergebnis = l.deter_result()[0]
             # print(f"\n{anzahl_durchlaeufe:,d}", 'Versuche', end='\r')
             v.config(text=f"{anzahl_durchlaeufe:,d} Versuche")
             if ergebnis is False:
                 anzahl_durchlaeufe += 1
-                l.statistik(zahlenreihe)
                 print(zahlenreihe)
             elif ergebnis is True:
                 verloren = False
-                print(zahlenreihe)
 
     if verloren is False:
         # print("\nGewonnen\n")

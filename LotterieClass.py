@@ -1,5 +1,9 @@
 from random import sample
 
+wertreihe = {}
+for i in range(1, 50):
+    wertreihe[i] = 0
+
 
 class Lotterie:
     '''Lotterieklasse - kann alles, was eine Lotterie koennen sollte.
@@ -10,25 +14,26 @@ class Lotterie:
         self.lottery = tip  # Der ausgefüllte "Lottoschein"
 
     def ziehung_der_zahlen(self):
+        global wertreihe
         ziehung = sample(self.lotteriezahlen, 6)  # Anzahl der zu ziehenden Zahlen
-        return sorted(ziehung)  # Gibt die zufällig gezogenen Zahlen aus.
+        for z in ziehung:
+            wertreihe[z] += 1
+        resultset = [sorted(ziehung), wertreihe]
+        # return sorted(ziehung), wertreihe  # Gibt die zufällig gezogenen Zahlen aus.
+        return resultset
 
     def output_zahlen(self):
         return self.lotteriezahlen
 
     def deter_result(self):
-        ziehung = sorted(self.ziehung_der_zahlen())
+        ziehung = sorted(self.ziehung_der_zahlen()[0])
+        wertreihe = (self.ziehung_der_zahlen()[1])
         # ziehung = sorted([4, 7, 31, 34, 47, 49])
         schein = sorted(self.lottery)
-        if schein == ziehung:
-            return True
+        if schein == ziehung[0]:
+            return True, wertreihe
         else:
-            return False
-
-    def statistik(self, wertreihe):
-        for i in self.ziehung_der_zahlen():
-            wertreihe[i] += 1
-            return wertreihe
+            return False, wertreihe
 
     @staticmethod  # statische Methode, um die Eingaben zu prüfen.
     def eingabe_pruefen(eingabe):
