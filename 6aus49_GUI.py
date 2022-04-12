@@ -16,6 +16,7 @@ anzahl_durchlaeufe = 0
 ergebnis = False
 lotto_ticket = []
 lotto_ticket_tk = StringVar()
+clicked_buttons = []
 
 ergebnisframe = Frame(root, relief=RAISED, borderwidth=4)
 ergebnisframe.grid(column=4, columnspan=3, rowspan=8, row=0, padx=5, pady=5)
@@ -39,10 +40,11 @@ def start_lotto_thread():
 
 
 def button_click(number, btn_name):
-    global lotto_ticket, e
+    global lotto_ticket, e, clicked_buttons
     if len(lotto_ticket) < 6:
         lotto_ticket.append(number)
         button_disable(btn_name)
+        clicked_buttons.append(btn_name)
         e.config(textvariable=lotto_ticket_tk)
         lotto_ticket_tk.set(str(lotto_ticket))
         for number in lotto_ticket:
@@ -69,6 +71,8 @@ def button_clear():
     lotto_ticket_tk.set(str(lotto_ticket))
     e.delete(0, END)
     v.config(text='0 Versuche')
+    for i in clicked_buttons:
+        i.config(state=NORMAL)
 
 
 def cancel_lotto():
@@ -81,12 +85,16 @@ def button_disable(button):
     button.config(state=DISABLED)
 
 
+def button_enable(button):
+    button.config(state=NORMAL)
+
+
 def button_enter():
     global clr_button, ergebnis, verloren, anzahl_durchlaeufe, endzeit, startzeit, lotto_ticket, running
     running = True
     verloren = True
     o.config(text='Noch keine Ergebnisse da!')
-    clr_button.config(state=DISABLED)
+    button_disable(enter_button)
     startzeit = datetime.now()
     if len(lotto_ticket) < 6:
         messagebox.showerror(title="Fehler!", message="Zu wenige Zahlen ausgewählt!")
@@ -121,12 +129,15 @@ def button_enter():
                       f"Dauer der Berechnung:\n{berechnungszeit[1]} Stunde(n).\n"
                       f"{berechnungszeit[2]} Minuten und \n"
                       f"{berechnungszeit[3]} Sekunden.")
+        button_enable(enter_button)
+        for bt in clicked_buttons:
+            button_enable(bt)
     else:
         o.config(text=f"Abgebrochen nach {anzahl_durchlaeufe:,d} versuchen.")
+        for bt in clicked_buttons:
+            button_enable(bt)
+            button_enable(enter_button)
 
-
-'''    clr_button.config(state=ACTIVE)
-    button_clear()'''
 
 '''Clear-Taste - Nummerntasten sind unten'''
 clr_button = Button(ergebnisframe, text='CLEAR', padx=15, pady=20, command=lambda: button_clear())
