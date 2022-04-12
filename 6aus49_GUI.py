@@ -17,6 +17,7 @@ ergebnis = False
 lotto_ticket = []
 lotto_ticket_tk = StringVar()
 clicked_buttons = []
+zahlenreihe = {}
 
 ergebnisframe = Frame(root, relief=RAISED, borderwidth=4)
 ergebnisframe.grid(column=4, columnspan=3, rowspan=8, row=0, padx=5, pady=5)
@@ -90,11 +91,13 @@ def button_enable(button):
 
 
 def button_enter():
-    global clr_button, ergebnis, verloren, anzahl_durchlaeufe, endzeit, startzeit, lotto_ticket, running
+    global clr_button, ergebnis, verloren, anzahl_durchlaeufe, endzeit, startzeit, lotto_ticket, running, zahlenreihe
     running = True
     verloren = True
     o.config(text='Noch keine Ergebnisse da!')
     button_disable(enter_button)
+    for i in range(1, 50):
+        zahlenreihe[i] = 0
     startzeit = datetime.now()
     if len(lotto_ticket) < 6:
         messagebox.showerror(title="Fehler!", message="Zu wenige Zahlen ausgewählt!")
@@ -111,8 +114,11 @@ def button_enter():
             v.config(text=f"{anzahl_durchlaeufe:,d} Versuche")
             if ergebnis is False:
                 anzahl_durchlaeufe += 1
+                l.statistik(zahlenreihe)
+                print(zahlenreihe)
             elif ergebnis is True:
                 verloren = False
+                print(zahlenreihe)
 
     if verloren is False:
         # print("\nGewonnen\n")
@@ -132,11 +138,13 @@ def button_enter():
         button_enable(enter_button)
         for bt in clicked_buttons:
             button_enable(bt)
+        print(zahlenreihe)
     else:
         o.config(text=f"Abgebrochen nach {anzahl_durchlaeufe:,d} versuchen.")
         for bt in clicked_buttons:
             button_enable(bt)
             button_enable(enter_button)
+        print(zahlenreihe)
 
 
 '''Clear-Taste - Nummerntasten sind unten'''

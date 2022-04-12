@@ -25,6 +25,11 @@ class Lotterie:
         else:
             return False
 
+    def statistik(self, wertreihe):
+        for i in self.ziehung_der_zahlen():
+            wertreihe[i] += 1
+            return wertreihe
+
     @staticmethod  # statische Methode, um die Eingaben zu prüfen.
     def eingabe_pruefen(eingabe):
         if str(eingabe).isnumeric():
