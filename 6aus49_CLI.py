@@ -3,11 +3,11 @@ from datetime import datetime
 
 from cursor import cursor
 from art import logo
-cursor.hide()
-
 
 import LotterieClass
 from zeitberechnen import zeitberechnen
+
+cursor.hide()
 
 startzeit_unix = time.time()
 startzeit = datetime.now()
