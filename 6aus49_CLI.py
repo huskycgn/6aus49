@@ -1,5 +1,6 @@
 import time
 from datetime import datetime
+from art import logo
 
 import LotterieClass
 from zeitberechnen import zeitberechnen
@@ -7,6 +8,8 @@ from zeitberechnen import zeitberechnen
 startzeit_unix = time.time()
 startzeit = datetime.now()
 my_ticket = []
+
+print(logo)
 
 while len(my_ticket) < 6:
     zahl = input("Bitte Zahl zwischen 1 und 49 eingeben: ")
