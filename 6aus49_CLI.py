@@ -1,6 +1,10 @@
 import time
 from datetime import datetime
+
+from cursor import cursor
 from art import logo
+cursor.hide()
+
 
 import LotterieClass
 from zeitberechnen import zeitberechnen
